@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 
-import { Suspense } from "react";
+import { Suspense } from "react"
 
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
 
-import { AddButton } from "./3dButton";
+import { AddButton } from "./3dButton"
 
 export const MetaMask = () => {
   const [walletAddress, setWalletAddress] = useState("")
@@ -27,7 +27,11 @@ export const MetaMask = () => {
         // console.log(accounts)
         setWalletAddress(accounts[0])
       } catch (err) {
-        setMessage(err.message)
+        // plus icon is created with two boxes
+        // when clicked in the center it call this function twice
+        // resulting in error - request already pending
+        // if we merge those two boxes into one shape, it will be fixed
+        console.log(err.message)
       }
     } else {
       // MetaMask absent
@@ -35,6 +39,7 @@ export const MetaMask = () => {
     }
   }
 
+  // Update after page load
   const getCurrentWalletConnected = async () => {
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
       try {
@@ -57,6 +62,7 @@ export const MetaMask = () => {
     }
   }
 
+  // Listening to account changes on metamask
   const addWalletListener = async () => {
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
       window.ethereum.on("accountsChanged", (accounts) => {

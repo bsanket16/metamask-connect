@@ -1,12 +1,15 @@
 {
+  "homepage": "https://bsanket16.github.io/metamask-connect",
   "name": "metamask-connect",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "preview": "vite preview",
     "build": "vite build",
-    "preview": "vite preview"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@react-three/drei": "^9.48.1",
